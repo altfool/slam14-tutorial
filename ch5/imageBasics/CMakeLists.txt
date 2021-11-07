@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.16)
+project(ch5-imageBasics)
+set(CMAKE_CXX_STANDARD 14)
+message(STATUS "This is project BINARY dir " ${PROJECT_BINARY_DIR})
+message(STATUS "This is project SOURCE dir " ${PROJECT_SOURCE_DIR})
+
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(imageBasics imageBasics.cpp)
+target_link_libraries(imageBasics ${OpenCV_LIBS})
+add_executable(undistortImage undistortImage.cpp)
+target_link_libraries(undistortImage ${OpenCV_LIBS})
