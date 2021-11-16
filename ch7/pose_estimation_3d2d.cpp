@@ -131,10 +131,10 @@ void find_feature_matches(const cv::Mat &img_1, const cv::Mat &img_2, std::vecto
 }
 
 cv::Point2d pixel2cam(const cv::Point2d &p, const cv::Mat &K) {
-    return cv::Point2d{(
-                               (p.x - K.at<double>(0, 2)) / K.at<double>(0, 0),
-                                       (p.y - K.at<double>(1, 2)) / K.at<double>(1, 1)
-                       )};
+    return cv::Point2d(
+            (p.x - K.at<double>(0, 2)) / K.at<double>(0, 0),
+            (p.y - K.at<double>(1, 2)) / K.at<double>(1, 1)
+    );
 }
 
 void bundleAdjustmentGaussNewton(const VecVector3d &points_3d, const VecVector2d &points_2d, const cv::Mat &K,
@@ -240,7 +240,9 @@ public:
         _jacobianOplusXi << -fx / Z, 0, fx * X / Z2, fx * X * Y / Z2, -fx - fx * X * X / Z2, fx * Y / Z,
                 0, -fy / Z, fy * Y / Z2, fy + fy * Y * Y / Z2, -fy * X * Y / Z2, -fy * X / Z;
     }
+
     virtual bool read(std::istream &in) override {}
+
     virtual bool write(std::ostream &out) const override {}
 
 private:
@@ -288,7 +290,7 @@ void bundleAdjustmentG2O(const VecVector3d &points_3d, const VecVector2d &points
     optimizer.initializeOptimization();
     optimizer.optimize(10);
     std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
-    std::chrono::duration<double> time_used = std::chrono::duration_cast<std::chrono::duration<double>>(t2-t1);
+    std::chrono::duration<double> time_used = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
     std::cout << "optimization costs time: " << time_used.count() << " seconds. " << std::endl;
     std::cout << "pose estimated by g2o = " << std::endl << vertex_pose->estimate().matrix() << std::endl;
     pose = vertex_pose->estimate();

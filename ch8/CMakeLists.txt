@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.16)
+project(ch8)
+set(CMAKE_CXX_FLAGS "-std=c++17")
+
+find_package(Eigen3 REQUIRED)
+message(STATUS "=======EIGEN3 Include Dirs: ${EIGEN3_INCLUDE_DIRS}=========")
+find_package(Sophus REQUIRED)
+message(STATUS "=======SOPHUS Include Dirs: ${SOPHUS_INCLUDE_DIRS}=========")
+find_package(OpenCV REQUIRED)
+message(STATUS "=======OpenCV Include Dirs: ${OpenCV_INCLUDE_DIRS}=========")
+message(STATUS "=======OpenCV libraries: ${OpenCV_LIBRARIES}==========")
+find_package(Pangolin REQUIRED)
+message(STATUS "=======Pangolin Include Dirs: ${Pangolin_INCLUDE_DIRS}=========")
+message(STATUS "=======Pangolin libraries: ${Pangolin_LIBRARIES}==========")
+include_directories(${EIGEN3_INCLUDE_DIRS} ${SOPHUS_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ${Pangolin_INCLUDE_DIRS})
+
+add_executable(optical_flow optical_flow.cpp)
+target_link_libraries(optical_flow ${OpenCV_LIBRARIES})
+
+add_executable(direct_method direct_method.cpp)
+target_link_libraries(direct_method ${OpenCV_LIBRARIES} ${Pangolin_LIBRARIES} fmt)
