@@ -16,3 +16,6 @@ include_directories(${OpenCV_INCLUDE_DIRS} ${DBoW3_LIBRARIES})
 
 add_executable(feature_training feature_training.cpp)
 target_link_libraries(feature_training ${DBoW3_LIBRARIES})
+
+add_executable(loop_closure loop_closure.cpp)
+target_link_libraries(loop_closure ${DBoW3_LIBRARIES})
