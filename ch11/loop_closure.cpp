@@ -67,5 +67,5 @@ int main(int argc, char *argv[]) {
         db.query(descriptors[i], ret, 4);   // max result = 4
         cout << "searching for image " << i << " returns " << ret << endl << endl;
     }
-    cout << "done." << endl;
+    cout << "done." << endl;    //jaja
 }
